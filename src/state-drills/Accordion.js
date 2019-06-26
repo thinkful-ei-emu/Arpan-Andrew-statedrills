@@ -10,26 +10,24 @@ export default class Accordian extends React.Component{
       currentActive: null
     }
 
-    handleClick = e => {
-      if (e.target.tagName !== 'BUTTON') return;
-
+    handleClick = e => {      
       this.setState({
-        currentActive: e.currentTarget.id
+        currentActive: e.target.id
       });
     }  
 
     render(){
       const keys = this.props.sections.map((key, index) => {
-        return <li id={index.toString()} onClick={this.handleClick}>
-          <button>{key.title}</button>
+        return <li key={index}>
+          <button id={index.toString()} onClick={this.handleClick}>{key.title}</button>
           {(this.state.currentActive === index.toString()) && <p>{key.content}</p>}
         </li>
       });
 
-      return <>
+      return (
         <ul>
           {keys}
         </ul>
-      </>
+      )
     }
 }

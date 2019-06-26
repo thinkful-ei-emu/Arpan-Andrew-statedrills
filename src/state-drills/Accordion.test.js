@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { shallow } from 'enzyme'
+import { shallow, mount} from 'enzyme'
 import toJson from 'enzyme-to-json'
 import Accordion from './Accordion';
 
@@ -35,7 +35,21 @@ describe ('Accordion', () => {
       })
 
       it('renders no sections as active by default', () => {
-        const wrapper = shallow(<Accordion sections={[]} />)
+        const wrapper = shallow(<Accordion sections={sections} />)
+        expect(toJson(wrapper)).toMatchSnapshot()
+      })
+
+      it('component opens a clicked section ', () => {
+        const wrapper = mount(<Accordion sections={sections} />)
+        wrapper.find('button').at(1).simulate('click')
+        expect(toJson(wrapper)).toMatchSnapshot()
+      })
+
+      it('component only opens the last section ', () => {
+        const wrapper = mount(<Accordion sections={sections} />)
+        wrapper.find('button').at(0).simulate('click')
+        wrapper.find('button').at(1).simulate('click')
+        wrapper.find('button').at(2).simulate('click')
         expect(toJson(wrapper)).toMatchSnapshot()
       })
 })
