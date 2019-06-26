@@ -1,40 +1,37 @@
 import React from 'react';
 
+import Key from './Key';
+
 export default class Accordian extends React.Component{
 
     static defaultProps = {
         sections: [
-            {title: '',
-            content: ''
+            {
+              title: '',
+              content: ''
             }
         ]
-    } 
-
-    state = {
-        sections: [
-            {title: '',
-            content: '',
-            open: false
-            }
-        ] 
     }
 
+    keys = this.props.sections.map(key => {
+      return <Key
+        title={key.title}
+        content={key.content}
+      />
+    })
 
-    handleClick = (e) => {
+    // handleClick = (e) => {
 
-       this.setState({
-           open: true
-       }) 
-    }
+    //    this.setState({
+    //        open: true
+    //    }) 
+    // }
 
 
     render(){
         return <>
                 <ul>
-                    <li>
-                    <button onClick={this.handleClick} type="button">{this.state.title}</button>
-                     <p>{this.state.content}</p>
-                    </li>
+                  {this.keys}
                 </ul>
         </>
     }
