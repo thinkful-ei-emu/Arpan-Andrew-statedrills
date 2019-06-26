@@ -5,12 +5,7 @@ import Key from './Key';
 export default class Accordian extends React.Component{
 
     static defaultProps = {
-        sections: [
-            {
-              title: '',
-              content: ''
-            }
-        ]
+        sections: []
     }
 
     keys = this.props.sections.map(key => {

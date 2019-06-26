@@ -3,8 +3,8 @@ import React from 'react';
 export default class Key extends React.Component {
 
   static defaultProps = {
-    title: 'Title',
-    content: 'Content'
+    title: '',
+    content: ''
   }
 
   state = {
