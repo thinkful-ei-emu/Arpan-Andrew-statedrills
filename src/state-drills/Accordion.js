@@ -1,19 +1,23 @@
 import React from 'react';
 
-import Key from './Key';
-
 export default class Accordian extends React.Component{
 
     static defaultProps = {
         sections: []
     }
 
-    keys = this.props.sections.map(key => {
-      return <Key
-        title={key.title}
-        content={key.content}
-      />
-    })
+    state = {
+      currentActive: null
+    }
+
+    handleClick = e => {
+      if (e.target.tagName !== 'BUTTON') return;
+
+      this.setState({
+        currentActive: e.currentTarget.id
+      });
+    }  
+
 
     // handleClick = (e) => {
 
@@ -24,10 +28,21 @@ export default class Accordian extends React.Component{
 
 
     render(){
-        return <>
-                <ul>
-                  {this.keys}
-                </ul>
-        </>
+      const keys = this.props.sections.map((key, index) => {
+        // return <Key
+        //   title={key.title}
+        //   content={key.content}
+        // />
+        return <li id={index.toString()} onClick={this.handleClick}>
+          <button>{key.title}</button>
+          {(this.state.currentActive === index.toString()) && <p>{key.content}</p>}
+        </li>
+      });
+
+      return <>
+        <ul>
+          {keys}
+        </ul>
+      </>
     }
 }
